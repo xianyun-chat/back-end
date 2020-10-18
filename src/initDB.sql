@@ -10,15 +10,15 @@ drop table if exists User;
 CREATE TABLE User (
   UID CHAR(20) NOT NULL PRIMARY KEY,
   Password CHAR(20) NOT NULL,
-  Name CHAR(20) NOT NULL DEFAULT "闲云用户"
+  UName CHAR(20) NOT NULL UNIQUE DEFAULT "闲云用户"
 ) charset = utf8;
 #-------------------------------------------------------
 #--聊天室信息   
 #-------------------------------------------------------
 CREATE TABLE ChatRoom (
-  CRID CHAR(20) NOT NULL PRIMARY KEY,
+  CRID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   CRName CHAR(50) NOT NULL DEFAULT "未命名",
-  CREATETime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CreateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   Creator CHAR(20) NOT NULL,
   Class CHAR(20) NOT NULL,
   Online INTEGER DEFAULT 0,
@@ -28,9 +28,10 @@ CREATE TABLE ChatRoom (
 #--聊天历史记录
 #-------------------------------------------------------
 CREATE TABLE ChatHistory (
-  CRID CHAR(20) NOT NULL,
+  CRID INT NOT NULL,
   UID CHAR(50) NOT NULL,
   Timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  Content CHAR(200) NOT NULL,
   PRIMARY KEY (CRID, UID, Timestamp),
   FOREIGN KEY (UID) REFERENCES User(UID) ON DELETE CASCADE ON UPDATE cascade,
   FOREIGN KEY (CRID) REFERENCES ChatRoom(CRID) ON DELETE CASCADE ON UPDATE cascade

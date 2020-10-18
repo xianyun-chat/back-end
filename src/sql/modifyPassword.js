@@ -7,10 +7,10 @@ exports.handleModifyPassword = (userID, passwordOld, passwordNew, callback) => {
 
   connection.query(sql, function(error, results) {
     if (error) {
-      console.log('Modify Password: ' + error.message + date.dateNow());
+      console.log('ModifyPassword: ' + error.message + date.dateNow());
       callback(false);
     } else if (results.affectedRows === 0) {
-      console.log('Modify Password: Nothing Changed!' + date.dateNow());
+      console.log('ModifyPassword: Nothing Changed!' + date.dateNow());
       callback(false);
     } else {
       callback(true);
