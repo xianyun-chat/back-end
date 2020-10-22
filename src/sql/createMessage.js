@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //创建一条消息
-exports.handleCreateMessage = (roomID, userID, content, callback) => {
+exports.createMessage = (roomID, userID, content, callback) => {
   let sql = `insert into ChatHistory(CRID, UID, Content) values('${roomID}', '${userID}', '${content}')`;
 
   connection.query(sql, function(error) {

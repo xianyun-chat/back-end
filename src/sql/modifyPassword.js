@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //修改密码
-exports.handleModifyPassword = (userID, passwordOld, passwordNew, callback) => {
+exports.modifyPassword = (userID, passwordOld, passwordNew, callback) => {
   let sql =
     "update User set Password='" + passwordNew + "' where UID='" + userID + "' and Password='" + passwordOld + "'";
 

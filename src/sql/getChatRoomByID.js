@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //通过ID获取聊天室信息
-exports.handleGetChatRoomByID = (roomID, callback) => {
+exports.getChatRoomByID = (roomID, callback) => {
   let sql = `select * from ChatRoom where CRID = '${roomID}'`;
 
   connection.query(sql, function(error, results) {

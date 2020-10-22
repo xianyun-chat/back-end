@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //用户登录
-exports.handleLogin = (userID, password, callback) => {
+exports.login = (userID, password, callback) => {
   let sql = "select * from User where UID = '" + userID + "' and Password = '" + password + "'";
 
   connection.query(sql, function(error, results) {

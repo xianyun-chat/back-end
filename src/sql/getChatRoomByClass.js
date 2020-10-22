@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //通过分类获取聊天室信息
-exports.handleGetChatRoomByClass = (className, callback) => {
+exports.getChatRoomByClass = (className, callback) => {
   let sql = `select * from ChatRoom where Class = '${className}'`;
 
   connection.query(sql, function(error, results) {

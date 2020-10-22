@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //获取聊天历史
-exports.handleGetChatHistory = (roomID, dataNum, callback) => {
+exports.getChatHistory = (roomID, dataNum, callback) => {
   let sql = `select * from ChatHistory where CRID = '${roomID}' order by Timestamp DESC limit ${dataNum}`;
 
   connection.query(sql, function(error, results) {

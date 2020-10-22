@@ -17,7 +17,7 @@ app.post('/api/login', (req, res) => {
 
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Content-Type', 'application/json');
-  handleDB.handleLogin(userID, password, (result) => {
+  handleDB.login(userID, password, (result) => {
     if (result) {
       //登录成功
       handleToken.createToken(userID, (token) => {
@@ -45,7 +45,7 @@ app.post('/api/logon', (req, res) => {
 
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Content-Type', 'application/json');
-  handleDB.handleLogon(userID, password, (result) => {
+  handleDB.logon(userID, password, (result) => {
     if (result) {
       //注册成功
       res.json({
@@ -69,7 +69,7 @@ app.post('/api/modify/password', (req, res) => {
 
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Content-Type', 'application/json');
-  handleDB.handleModifyPassword(userID, passwordOld, passwordNew, (result) => {
+  handleDB.modifyPassword(userID, passwordOld, passwordNew, (result) => {
     if (result) {
       //修改成功
       res.json({

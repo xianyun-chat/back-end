@@ -1,7 +1,7 @@
 const date = require('../date');
 
 //修改用户名称
-exports.handleModifyUserName = (userID, userName, callback) => {
+exports.modifyUserName = (userID, userName, callback) => {
   let sql = `update User set UName='${userName}' where UID='${userID}'`;
 
   connection.query(sql, function(error, results) {
