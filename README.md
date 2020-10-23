@@ -1,7 +1,7 @@
-# 访问后端接口
+# 服务器后端API接口定义规范
 
-* 后端服务地址: http://49.235.190.178:10010
-* method: POST
+* URL: http://49.235.190.178:10010
+* Method: POST
 * ContentType: application/x-www-form-urlencoded
 
 > 登陆: /api/login
