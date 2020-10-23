@@ -10,7 +10,7 @@ drop table if exists User;
 CREATE TABLE User (
   UID CHAR(20) NOT NULL PRIMARY KEY,
   Password CHAR(20) NOT NULL,
-  UName CHAR(20) NOT NULL UNIQUE DEFAULT "闲云用户"
+  UName CHAR(20) NOT NULL DEFAULT "闲云用户"
 ) charset = utf8;
 #-------------------------------------------------------
 #--聊天室信息   
