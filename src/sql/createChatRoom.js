@@ -1,8 +1,8 @@
 const date = require('../date');
 
 //创建聊天室
-exports.createChatRoom = (roomName, userID, className, callback) => {
-  let sql = `insert into ChatRoom(CRName, Creator, Class) values('${roomName}', '${userID}', '${className}')`;
+exports.createChatRoom = (roomName, className, userID, callback) => {
+  let sql = `insert into ChatRoom(CRName, Class, Creator) values('${roomName}', '${className}', '${userID}')`;
 
   connection.query(sql, function(error) {
     if (error) {

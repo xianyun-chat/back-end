@@ -21,7 +21,6 @@ CREATE TABLE ChatRoom (
   CreateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   Creator CHAR(20) NOT NULL,
   Class CHAR(20) NOT NULL,
-  Online INTEGER DEFAULT 0,
   FOREIGN KEY (Creator) REFERENCES User(UID) ON DELETE CASCADE ON UPDATE CASCADE
 ) charset = utf8;
 #-------------------------------------------------------

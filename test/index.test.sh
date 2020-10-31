@@ -5,3 +5,5 @@ cd test/sql
 mocha logon.test.js
 mocha login.test.js
 mocha modifyPassword.test.js
+mocha modifyUserName.test.js
+mocha createChatRoom.test.js

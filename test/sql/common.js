@@ -1,11 +1,11 @@
-const { assert } = require('chai');
+const {assert} = require('chai');
 const request = require('request');
 
 const server = 'http://localhost:10010';
 
 exports.testCreator = (describeText, its) => {
   describe(describeText, () => {
-    its.forEach(({ url, title, body, isTrue }) => {
+    its.forEach(({url, title, body, isTrue}) => {
       it(title, () => {
         request(
           {
