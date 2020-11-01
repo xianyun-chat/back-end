@@ -33,29 +33,3 @@ exports.dateTime = (days, date) => {
 
   return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 };
-
-//输入课程的起止日期和上课时间，生成课程每周的时间数据
-exports.dateCourse = (begYear, begMonth, begDay, endYear, endMonth, endDay, begHour, begMinute, endHour, endMinute) => {
-  let weeks = 16;
-  let datetimes = [];
-  let startTime = new Date(begYear, begMonth - 1, begDay, begHour, begMinute, 0);
-  let endTime = new Date(begYear, begMonth - 1, begDay, endHour, endMinute, 0);
-  let endDate = new Date(endYear, endMonth - 1, endDay, 23, 59, 59);
-
-  while (weeks > 0) {
-    if (endTime.getTime() > endDate.getTime()) break;
-
-    datetimes.push({
-      startTime: this.dateTime(0, startTime),
-      endTime: this.dateTime(0, endTime)
-    });
-
-    startTime = Date.parse(startTime) + 7 * 24 * 60 * 60 * 1000;
-    startTime = new Date(parseInt(startTime));
-    endTime = Date.parse(endTime) + 7 * 24 * 60 * 60 * 1000;
-    endTime = new Date(parseInt(endTime));
-    weeks = weeks - 1;
-  }
-
-  return datetimes;
-};

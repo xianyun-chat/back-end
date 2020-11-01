@@ -4,6 +4,34 @@
 * Method: POST
 * ContentType: application/x-www-form-urlencoded
 
+> 如何发送消息
+
+```javascript
+  const io = require('socket.io-client');
+  const socket = io('http://localhost:10020', {
+    reconnectionDelayMax: 100000
+  });
+  // 接受消息，根据返回的消息决定展示与否，如何展示
+  socket.on('receive', (message) => {
+    /**
+     * 返回的 message 对象包括发送的所有内容
+     * roomID：聊天室ID
+     * userID：用户ID
+     * content：聊天内容
+     * code：状态码（成功200/失败3001）
+     * message：提示信息
+     */
+  });
+  // 发送一条消息，用户输入发送消息时执行这段代码
+  socket.emit('send', {
+    roomID: 123,
+    userID: 123,
+    content: '今天天气真好',
+  });
+  // 用户退出聊天室的时候应该断开连接
+  socket.disconnect();
+```
+
 > 登陆: /api/login
 
 | 请求参数名 | 类型 | 例子 | 说明 |
@@ -89,3 +117,16 @@
 | code | number | 200/2003  | 状态码（成功/失败） |
 | message | string | 'get chatRoom success!' | 提示信息 |
 | chat_rooms | array\<object\> | 略 | 聊天室信息（对象数组）|
+
+> 获取聊天历史: /api/get/chat_history
+
+| 请求参数名 | 类型 | 例子 | 说明 |
+| ---- | ---- | ---- | ---- |
+| roomID | number | 1 | 聊天室ID |
+| dataNum | number | 1 | 返回的聊天消息数量 |
+
+| 响应参数名 | 类型 | 例子 | 说明 |
+| ---- | ---- | ---- | ---- |
+| code | number | 200/3002  | 状态码（成功/失败） |
+| message | string | 'get chat history success!' | 提示信息 |
+| chat_history | array\<object\> | 略 | 聊天内容（对象数组）|
