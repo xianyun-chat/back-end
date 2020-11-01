@@ -11,6 +11,8 @@
   const socket = io('http://localhost:10020', {
     reconnectionDelayMax: 100000
   });
+  // 订阅聊天室消息，这样就能接收到目标聊天室所有用户发送的消息
+  socket.emit('subscribe', {roomID: 1});
   // 接受消息，根据返回的消息决定展示与否，如何展示
   socket.on('receive', (message) => {
     /**
@@ -28,6 +30,8 @@
     userID: 123,
     content: '今天天气真好',
   });
+  // 退出前取消订阅
+  socket.emit('unsubscribe', {roomID: 1});
   // 用户退出聊天室的时候应该断开连接
   socket.disconnect();
 ```

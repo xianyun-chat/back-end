@@ -13,23 +13,28 @@ app.use(
 );
 
 io.on('connection', function(socket) {
-  console.log('Connected!');
+  //建立连接
+  console.log(`Connected: ${socket.id}`);
   //失去连接
   socket.on('disconnect', () => {
-    console.log('Disconnect');
+    console.log(`Disconnected: ${socket.id}`);
   });
-  //消息
-  socket.on('send', function(message) {
+  //订阅聊天室消息
+  socket.on('subscribe', function(data) {
+    socket.join(data.roomID);
+  });
+  //取消订阅
+  socket.on('unsubscribe', function(data) {
+    socket.leave(data.roomID);
+  });
+  //消息处理
+  socket.on('clientToServer', function(message) {
     const {roomID, userID, content} = message;
     handleDB.createMessage(roomID, userID, content, (result) => {
       if (result) {
-        io.emit('receive', {
-          ...message,
-          code: 200,
-          message: 'create message success!'
-        });
+        io.sockets.in(roomID).emit('serverToClient', message);
       } else {
-        io.emit('receive', {
+        socket.emit('serverToClient', {
           ...message,
           code: 3001,
           message: 'create message failed!'
