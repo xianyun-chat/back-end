@@ -18,7 +18,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "sh test/index.test.sh"
+    "test": "sh test/index.test.sh",
+    "start": "cd src && node app.js"
   },
   "author": "cat",
   "license": "ISC"

@@ -10,10 +10,10 @@ const data = [
 ];
 
 require('./common').testCreator(
-  '修改密码接口测试',
+  '修改昵称接口测试',
   data.map((item) => ({
     url,
-    title: `修改一个用户的密码: ${item[0]}-${item[1]}(${item[2]})`,
+    title: `修改一个用户的昵称: ${item[0]}-${item[1]}(${item[2]})`,
     body: bodyCreator(item[0], item[1]),
     isTrue: item[2]
   }))

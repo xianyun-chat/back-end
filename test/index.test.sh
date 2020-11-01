@@ -7,3 +7,5 @@ mocha login.test.js
 mocha modifyPassword.test.js
 mocha modifyUserName.test.js
 mocha createChatRoom.test.js
+mocha getChatRoomByClass.test.js
+mocha getChatRoomByID.test.js

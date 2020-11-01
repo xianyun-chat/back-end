@@ -5,7 +5,7 @@ const server = 'http://localhost:10010';
 
 exports.testCreator = (describeText, its) => {
   describe(describeText, () => {
-    its.forEach(({url, title, body, isTrue}) => {
+    its.forEach(({url, title, body, isTrue, callback}) => {
       it(title, () => {
         request(
           {
@@ -22,6 +22,7 @@ exports.testCreator = (describeText, its) => {
             error && console.error(error.message);
             isTrue && assert.equal(code, 200);
             !isTrue && assert.notEqual(code, 200);
+            callback && callback(body);
           }
         );
       });

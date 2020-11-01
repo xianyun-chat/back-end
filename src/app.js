@@ -126,9 +126,10 @@ app.post(
   createCommonAPI({
     orderedParameterList: ['roomID'],
     handleFunction: handleDB.getChatRoomByID,
-    onSuccess: () => ({
+    onSuccess: (result) => ({
       code: 200,
-      message: 'get chatRoom success!'
+      message: 'get chatRoom success!',
+      chat_room: result[0]
     }),
     onFailed: () => ({
       code: 2002,
@@ -143,9 +144,10 @@ app.post(
   createCommonAPI({
     orderedParameterList: ['className'],
     handleFunction: handleDB.getChatRoomByClass,
-    onSuccess: () => ({
+    onSuccess: (result) => ({
       code: 200,
-      message: 'get chatRoom success!'
+      message: 'get chatRoom success!',
+      chat_rooms: result
     }),
     onFailed: () => ({
       code: 2003,

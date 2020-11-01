@@ -14,7 +14,7 @@ require('./common').testCreator(
   '创建聊天室接口测试',
   data.map((item) => ({
     url,
-    title: `用户登陆: ${item[0]}-${item[1]}-${item[2]}(${item[2]})`,
+    title: `创建聊天室: ${item[0]}-${item[1]}-${item[2]}(${item[3]})`,
     body: bodyCreator(item[0], item[1], item[2]),
     isTrue: item[3]
   }))

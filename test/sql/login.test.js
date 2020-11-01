@@ -11,7 +11,7 @@ const data = [
 ];
 
 require('./common').testCreator(
-  '修改密码接口测试',
+  '用户登陆接口测试',
   data.map((item) => ({
     url,
     title: `用户登陆: ${item[0]}-${item[1]}(${item[2]})`,
