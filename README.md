@@ -1,6 +1,6 @@
 # 服务器后端API接口定义规范
 
-* URL: http://49.235.190.178:10010
+* URL: <http://49.235.190.178:10010>
 * Method: POST
 * ContentType: application/x-www-form-urlencoded
 

@@ -1,5 +1,7 @@
 let app = require('express')();
 let bodyParser = require('body-parser');
+let http = require('http').createServer(app);
+let io = require('socket.io')(http);
 let handleDB = require('./handleDB');
 let handleToken = require('./handleToken');
 
@@ -9,6 +11,33 @@ app.use(
     extended: false
   })
 );
+
+io.on('connection', function(socket) {
+  console.log('Connected!');
+  //失去连接
+  socket.on('disconnect', () => {
+    console.log('Disconnect');
+  });
+  //消息
+  socket.on('send', function(message) {
+    const {roomID, userID, content} = message;
+    handleDB.createMessage(roomID, userID, content, (result) => {
+      if (result) {
+        io.emit('receive', {
+          ...message,
+          code: 200,
+          message: 'create message success!'
+        });
+      } else {
+        io.emit('receive', {
+          ...message,
+          code: 3001,
+          message: 'create message failed!'
+        });
+      }
+    });
+  });
+});
 
 //普通查询接口
 const createCommonAPI = ({orderedParameterList, handleFunction, onSuccess, onFailed}) => (req, res) => {
@@ -156,5 +185,24 @@ app.post(
   })
 );
 
+//获取聊天历史
+app.post(
+  '/api/get/chat_history',
+  createCommonAPI({
+    orderedParameterList: ['roomID', 'dataNum'],
+    handleFunction: handleDB.getChatHistory,
+    onSuccess: (result) => ({
+      code: 200,
+      message: 'get chat history success!',
+      chat_history: result
+    }),
+    onFailed: () => ({
+      code: 3002,
+      message: 'get chat history failed!'
+    })
+  })
+);
+
 //启动服务
 app.listen(10010);
+http.listen(10020);
