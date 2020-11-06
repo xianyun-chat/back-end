@@ -141,7 +141,7 @@ app.post(
 app.post(
   '/api/create/chat_room',
   createCommonAPI({
-    orderedParameterList: ['roomName', 'className', 'userID'],
+    orderedParameterList: ['roomName', 'className', 'userID', 'capacity'],
     handleFunction: handleDB.createChatRoom,
     onSuccess: () => ({
       code: 200,
@@ -207,6 +207,26 @@ app.post(
     })
   })
 );
+
+//查询目标聊天室活跃用户数
+app.post('/api/get/chat_room/users', (req, res) => {
+  let {roomID} = req.body;
+
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Content-Type', 'application/json');
+  if (io.sockets.adapter.rooms[roomID]) {
+    res.json({
+      code: 200,
+      message: "get chatRoom's users success!",
+      number: io.sockets.adapter.rooms[roomID].length
+    });
+  } else {
+    res.json({
+      code: 3003,
+      message: "get chatRoom's users failed!"
+    });
+  }
+});
 
 //启动服务
 app.listen(10010);

@@ -14,18 +14,20 @@
   // 订阅聊天室消息，这样就能接收到目标聊天室所有用户发送的消息
   socket.emit('subscribe', {roomID: 1});
   // 接受消息，根据返回的消息决定展示与否，如何展示
-  socket.on('receive', (message) => {
+  socket.on('serverToClient', (message) => {
     /**
      * 返回的 message 对象包括发送的所有内容
      * roomID：聊天室ID
      * userID：用户ID
      * content：聊天内容
-     * code：状态码（成功200/失败3001）
+     * ------------------------------------
+     * 下面这两个字段只有用户消息发送失败才会有
+     * code：状态码（失败3001）
      * message：提示信息
      */
   });
   // 发送一条消息，用户输入发送消息时执行这段代码
-  socket.emit('send', {
+  socket.emit('clientToServer', {
     roomID: 123,
     userID: 123,
     content: '今天天气真好',
@@ -92,6 +94,7 @@
 | roomName | string | '一起来聊天!' | 聊天室名称 |
 | className | string | '美食' | 聊天室分类 |
 | userID | string | '13978278212' | 用户账号/ID |
+| capacity | number | 50 | 聊天室人数上限 |
 
 | 响应参数名 | 类型 | 例子 | 说明 |
 | ---- | ---- | ---- | ---- |
@@ -134,3 +137,15 @@
 | code | number | 200/3002  | 状态码（成功/失败） |
 | message | string | 'get chat history success!' | 提示信息 |
 | chat_history | array\<object\> | 略 | 聊天内容（对象数组）|
+
+> 获取聊天室活跃用户数量: /api/get/chat_room/users
+
+| 请求参数名 | 类型 | 例子 | 说明 |
+| ---- | ---- | ---- | ---- |
+| roomID | number | 1 | 聊天室ID |
+
+| 响应参数名 | 类型 | 例子 | 说明 |
+| ---- | ---- | ---- | ---- |
+| code | number | 200/3003  | 状态码（成功/失败） |
+| message | string | 'get chatRoom's users success!' | 提示信息 |
+| number | number | 20 | 聊天室用户数 |

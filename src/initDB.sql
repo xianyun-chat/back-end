@@ -13,7 +13,7 @@ CREATE TABLE User (
   UName CHAR(20) NOT NULL DEFAULT "闲云用户"
 ) charset = utf8;
 #-------------------------------------------------------
-#--聊天室信息   
+#--聊天室信息
 #-------------------------------------------------------
 CREATE TABLE ChatRoom (
   CRID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -21,6 +21,7 @@ CREATE TABLE ChatRoom (
   CreateTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   Creator CHAR(20) NOT NULL,
   Class CHAR(20) NOT NULL,
+  Capacity INT DEFAULT 50,
   UNIQUE (CRName, Creator),
   FOREIGN KEY (Creator) REFERENCES User(UID) ON DELETE CASCADE ON UPDATE CASCADE
 ) charset = utf8;
