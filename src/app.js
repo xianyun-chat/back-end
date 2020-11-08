@@ -50,6 +50,10 @@ const createCommonAPI = ({orderedParameterList, handleFunction, onSuccess, onFai
 
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Content-Type', 'application/json');
+  if (parameters.findIndex((parameter) => parameter === '') !== -1) {
+    return res.json(onFailed());
+  }
+
   handleFunction(...parameters, (result) => {
     if (result) {
       res.json(onSuccess(result));
