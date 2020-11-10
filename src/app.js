@@ -72,10 +72,12 @@ app.post('/api/login', (req, res) => {
   handleDB.login(userID, password, (result) => {
     if (result) {
       //登录成功
+      delete result.Password;
       handleToken.createToken(userID, (token) => {
         res.json({
           code: 200,
           message: 'login success!',
+          user: result,
           token: token,
           expiresIn: 7200 //有效期为２小时
         });

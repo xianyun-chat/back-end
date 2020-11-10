@@ -12,7 +12,7 @@ exports.login = (userID, password, callback) => {
       console.log('Login: Empty Data!' + date.dateNow());
       callback(false);
     } else {
-      callback(true);
+      callback(results[0]);
     }
   });
 };
